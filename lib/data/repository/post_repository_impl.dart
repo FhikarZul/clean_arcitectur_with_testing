@@ -16,8 +16,7 @@ class PostRepositoryImpl extends PostRepository {
       final todoList = result.map((e) => e.toDomainModel()).toList();
       return Right(todoList);
     } catch (e) {
-      print(e.toString());
-      return Left(e.toString());
+      return const Left('Failed to get post');
     }
   }
 }

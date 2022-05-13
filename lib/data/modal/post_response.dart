@@ -24,5 +24,5 @@ class PostResponse extends Equatable {
   Post toDomainModel() => Post(title: title, body: body);
 
   @override
-  List<Object?> get props => [title, body];
+  List<Object?> get props => [userId, id, title, body];
 }
