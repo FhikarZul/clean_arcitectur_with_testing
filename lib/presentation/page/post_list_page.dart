@@ -1,7 +1,8 @@
 import 'package:clean_arcitectur_with_testing/injection.dart';
+import 'package:clean_arcitectur_with_testing/presentation/page/comments_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/post_list_bloc.dart';
+import '../bloc/post_list/post_list_bloc.dart';
 
 class PostListPage extends StatelessWidget {
   const PostListPage({Key? key}) : super(key: key);
@@ -9,7 +10,10 @@ class PostListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PostListBloc>(
-      create: (context) => PostListBloc(locator.get())..add(PostListInit()),
+      create: (context) => PostListBloc(getPostUsecase: locator.get())
+        ..add(
+          PostListInit(),
+        ),
       child: const PostListScreen(),
     );
   }
@@ -50,9 +54,23 @@ class _PostListScreenState extends State<PostListScreen> {
               itemCount: state.data.length,
               itemBuilder: (context, index) {
                 final item = state.data[index];
-                return ListTile(
-                  title: Text(item.title),
-                  subtitle: Text(item.body),
+                return Card(
+                  child: InkWell(
+                    child: ListTile(
+                      title: Text(item.title),
+                      subtitle: Text(item.body),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CommentsPage(
+                            idPost: item.id,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             );

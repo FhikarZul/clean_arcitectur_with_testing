@@ -15,7 +15,7 @@ class PostListLoading extends PostListState {
 }
 
 class PostListHasData extends PostListState {
-  final List<Post> data;
+  final List<DomainPost> data;
 
   const PostListHasData(this.data);
 

@@ -1,14 +1,14 @@
 import 'package:clean_arcitectur_with_testing/domain/repository/post_repository.dart';
 import 'package:dartz/dartz.dart';
 
-import '../model/post.dart';
+import '../model/domain_post.dart';
 
 class GetPostUsecase {
-  final PostRepository postRepository;
+  final IPostRepository respository;
 
-  const GetPostUsecase(this.postRepository);
+  const GetPostUsecase(this.respository);
 
-  Future<Either<String, List<Post>>> execute() {
-    return postRepository.getPostList();
+  Future<Either<String, List<DomainPost>>> execute() {
+    return respository.getPostList();
   }
 }
